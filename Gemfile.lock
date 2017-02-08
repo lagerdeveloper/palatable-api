@@ -43,10 +43,17 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (7.1.4)
     bcrypt (3.1.11)
     builder (3.2.3)
     byebug (9.0.6)
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     case_transform (0.2)
       activesupport
     coffee-rails (4.2.1)
@@ -202,7 +209,9 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  annotate
   byebug
+  carrierwave
   coffee-rails (~> 4.2)
   devise
   factory_girl_rails
