@@ -13,7 +13,9 @@
 #  serving_size_description :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
+#  image                    :string
 #
+
 require 'carrierwave/orm/activerecord'
 class Recipe < ApplicationRecord
   mount_uploader :image, ImageUploader
