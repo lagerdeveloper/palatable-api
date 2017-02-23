@@ -1,18 +1,20 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  skip_before_action :verify_authenticity_token
   respond_to :json
 
   # POST /resource
   def create
-    super
+    user = User.new(user_params)
+    if user.save
+      render json: user
+    else
+      render json: { error: user.errors }
+    end
   end
 
-  # PUT /resource
-  # def update
-  #   super
-  # end
+  private
 
-  # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def user_params
+    params.require(:user).permit(:email, :password)
+  end
 end
