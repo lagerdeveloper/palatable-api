@@ -1,11 +1,11 @@
 require 'jwt'
 
 module AuthToken
-  def issue_token(payload)
+  def self.issue_token(payload)
     JWT.encode(payload, Rails.application.secrets.secret_key_base)
   end
 
-  def valid_token?(token)
+  def self.valid_token?(token)
     begin
       JWT.decode(token, Rails.application.secrets.secret_key_base)
     rescue

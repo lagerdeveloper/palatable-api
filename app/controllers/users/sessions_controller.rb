@@ -10,7 +10,7 @@ class Users::SessionsController < Devise::SessionsController
 
     if resource.valid_password?(sign_in_params[:password])
       sign_in :user, resource
-      token = issue_token({ user_id: resource.id })
+      token = AuthToken.issue_token({ user_id: resource.id })
       render json: { user_id: resource.id, token: token }
     else
       invalid_login_attempt

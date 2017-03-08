@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
 
   def verify_jwt_token
     head :unauthorized if request.headers['Authorization'].nil? ||
-       !valid_token?(request.headers['Authorization'].split(' ').last)
+       !AuthToken.valid_token?(request.headers['Authorization'].split(' ').last)
   end
 end
