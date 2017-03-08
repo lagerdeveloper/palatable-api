@@ -1,4 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
+  include AuthToken
   skip_before_action :verify_authenticity_token
   respond_to :json
 
@@ -9,9 +10,11 @@ class Users::SessionsController < Devise::SessionsController
 
     if resource.valid_password?(sign_in_params[:password])
       sign_in :user, resource
-      render json: { user_email: resource.email }
+      token = issue_token({ user_id: resource.id })
+      render json: { user_id: resource.id, token: token }
+    else
+      invalid_login_attempt
     end
-    invalid_login_attempt
   end
 
   protected
