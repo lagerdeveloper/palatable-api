@@ -8,7 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if user.save
       render json: user
     else
-      render json: { error: user.errors }
+      render json: { status: 500, error: user.errors }
     end
   end
 
