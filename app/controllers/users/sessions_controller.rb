@@ -20,7 +20,7 @@ class Users::SessionsController < Devise::SessionsController
   protected
 
   def invalid_login_attempt
-    render json: { status: 422, error: 'Invalid email or password.' }
+    render json: { status: 422, errors: 'Invalid email or password.' }
   end
 
   def sign_in_params
