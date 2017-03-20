@@ -17,10 +17,28 @@ class Users::SessionsController < Devise::SessionsController
     end
   end
 
+  def destroy
+    resource = User.find_for_database_authentication(id: params[:user][:id])
+    return invalid_destroy_attempt unless resource
+    signed_out = sign_out resource
+    if signed_out
+      render json: { status: :ok, message: 'Signed out successfully' }
+    else
+      invalid_destroy_attempt
+    end
+  end
+
   protected
 
+  def verify_signed_out_user
+  end
+
   def invalid_login_attempt
-    render json: { status: 422, errors: 'Invalid email or password.' }
+    render json: { error: 'Invalid email or password.' }, status: 422
+  end
+
+  def invalid_destroy_attempt
+    render json: { error: 'Error signing out.' }, status: 400
   end
 
   def sign_in_params
