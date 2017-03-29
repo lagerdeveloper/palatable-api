@@ -42,6 +42,7 @@ gem 'jwt'
 gem 'rack-cors'
 gem 'annotate'
 gem 'carrierwave'
+gem 'carrierwave-base64'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

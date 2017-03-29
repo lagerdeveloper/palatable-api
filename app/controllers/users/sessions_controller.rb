@@ -1,6 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
   include AuthToken
-  skip_before_action :verify_authenticity_token
   skip_before_action :verify_signed_out_user
   before_action :verify_jwt_token, only: :destroy
   respond_to :json
@@ -13,7 +12,12 @@ class Users::SessionsController < Devise::SessionsController
     if resource.valid_password?(sign_in_params[:password])
       sign_in :user, resource
       token = AuthToken.issue_token({ user_id: resource.id })
-      render json: { user_id: resource.id, token: token }
+      render json: {
+        user_id: resource.id,
+        name: resource.name,
+        image: resource.profile_image.url,
+        token: token,
+      }
     else
       invalid_login_attempt('Incorrect password')
     end

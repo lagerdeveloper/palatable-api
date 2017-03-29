@@ -23,6 +23,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  mount_base64_uploader :profile_image, ProfileImageUploader
 
   validates :name, presence: true, uniqueness: true
 end

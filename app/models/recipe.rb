@@ -16,7 +16,6 @@
 #  image                    :string
 #
 
-require 'carrierwave/orm/activerecord'
 class Recipe < ApplicationRecord
   mount_uploader :image, ImageUploader
 end
