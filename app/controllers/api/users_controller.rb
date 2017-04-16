@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
   def update
     user = User.find(update_params[:id])
     if user.update(update_params)
-      render json: { image: user.profile_image.url }
+      head :ok
     else
       head :bad_request
     end
