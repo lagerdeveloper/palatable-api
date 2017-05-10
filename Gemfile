@@ -39,6 +39,7 @@ gem 'active_model_serializers'
 #devise for user authentication
 gem 'devise'
 gem 'jwt'
+gem 'knock'
 gem 'rack-cors'
 gem 'annotate'
 gem 'carrierwave'

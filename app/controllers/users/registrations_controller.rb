@@ -1,6 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   include AuthToken
-  skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_scope!
   before_action :verify_jwt_token, only: :destroy
   respond_to :json
