@@ -16,8 +16,9 @@ class Api::UserAuthController < Knock::AuthTokenController
 
   # action for signing the user in { requires authenticate }
   def create
+    token = auth_token.token
     render json: {
-      token: auth_token.token,
+      token: token,
       name: entity.name,
       image: entity.profile_image.url,
       user_id: entity.id,
