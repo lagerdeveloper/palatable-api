@@ -8,7 +8,7 @@ class Api::UserAuthController < Knock::AuthTokenController
   def create_account
     user = User.new(sign_up_params)
     if user.save
-      render json: user
+      render json: user, status: :created
     else
       render json: { error: user.errors.full_messages }, status: :bad_request
     end
