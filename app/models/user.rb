@@ -26,4 +26,12 @@ class User < ApplicationRecord
   mount_base64_uploader :profile_image, ProfileImageUploader
 
   validates :name, presence: true, uniqueness: true
+
+  def authenticate password
+    valid_password?(password)
+  end
+
+  def self.from_token_request request
+    find_for_database_authentication(email: request.params[:auth][:email])
+  end
 end
