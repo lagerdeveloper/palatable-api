@@ -1,7 +1,8 @@
 class Api::UserAuthController < Knock::AuthTokenController
   include Knock::Authenticable
+
   skip_before_action :authenticate, only: [:create_account, :destroy_account]
-  before_action :authenticate_user, only: :destroy
+  before_action :authenticate_user, only: :destroy_account
 
   respond_to :json
   # action for creating an account for the user
@@ -16,7 +17,7 @@ class Api::UserAuthController < Knock::AuthTokenController
 
   # action for signing the user in { requires authenticate }
   def create
-    token = auth_token.token
+    token = Knock::AuthToken.new(payload: { sub: entity.id }).token
     render json: {
       token: token,
       name: entity.name,
